@@ -32,7 +32,6 @@ const onChangePassword = function (event) {
 }
 const onSignOut = function (event) {
   event.preventDefault()
-
   api.signOut()
     .then(ui.signOutSuccess)
     .catch(ui.signOutFailure)
@@ -46,26 +45,29 @@ const onClickToReset = function () {
 // create onClick function to handle the clicks on cells
 const gamebord = [
   [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
-
 ]
+
+const wrongMove = function () {
+  $('.message').html('this box is taken')
+  console.log($('.message'))
+}
+
 let currentPlayer = 'x'
 
 const onClick = function (event) {
   event.preventDefault()
-  let currentValue = $(event.target).data('id')
-  if (currentValue === ' ' && currentPlayer === 'x') {
+  let currentValue = $(event.target).text()
+  console.log(currentValue)
+  if (currentValue === '' && currentPlayer === 'x') {
     currentValue = $(event.target).text(currentPlayer)
+    console.log(currentValue)
     currentPlayer = 'o'
-  }
-  if (currentValue === ' ' && currentPlayer === 'o') {
+  } else if (currentValue === '' && currentPlayer === 'o') {
     currentValue = $(event.target).text(currentPlayer)
     currentPlayer = 'x'
+  } else {
+    wrongMove()
   }
-  if (currentValue !== ' ' && (currentPlayer === 'x' || currentPlayer === 'o')) {
-    console.log('console.error();')
-  }
-
-  console.log(currentValue)
 }
 const addHandlers = function () {
   // when the #click-00 is clicked run on click function
