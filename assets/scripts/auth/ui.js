@@ -50,7 +50,7 @@ const indexGameFailure = function (data) {
 }
 const updateGameSuccess = function (data) {
   console.log('update success ', data)
-  store.game = data.game
+  // store.game = data.game
 }
 const updateGameFailure = function () {
   console.log('update failure')

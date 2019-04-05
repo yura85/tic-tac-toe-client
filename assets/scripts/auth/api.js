@@ -64,13 +64,16 @@ const upDateGame = function (dataOfId, currentPlayer, gameStatus) {
     },
     data: {
       game: {
-        value: dataOfId,
-        cell: currentPlayer
-      },
-      over: gameStatus
+        cell: {
+          index: dataOfId,
+          value: currentPlayer
+        },
+        over: gameStatus
+      }
     }
   })
 }
+
 module.exports = {
   signUp,
   signIn,

@@ -68,7 +68,7 @@ const onClick = function (event) {
   let currentValue = $(event.target).text()
   console.log(currentValue)
   const dataOfId = $(event.target).data('id')
-  store.game.id = dataOfId
+
   // store.game.id = dataOfId
   console.log(dataOfId)
 
@@ -78,11 +78,13 @@ const onClick = function (event) {
   if (currentValue === '' && currentPlayer === 'x') {
     currentValue = $(event.target).text(currentPlayer)
     winnerCheck(gameboard)
+    api.upDateGame(dataOfId, currentPlayer, gameStatus)
     console.log(currentValue)
     switchPlayer()
   } else if (currentValue === '' && currentPlayer === 'o') {
     currentValue = $(event.target).text(currentPlayer)
     winnerCheck(gameboard)
+    api.upDateGame(dataOfId, currentPlayer, gameStatus)
     console.log(currentValue)
     switchPlayer()
   } else {
@@ -103,14 +105,14 @@ const onIndexGame = function (event) {
     .then(ui.indexGameSuccess)
     .catch(ui.indexGameFailure)
 }
-const onUpDataGame = function (event) {
-  event.preventDefault()
-  const data = getFormFields(event.target)
-  console.log(data)
-  api.upDateGame()
-    .then(ui.updateGameSuccess)
-    .catch(ui.updateGameFailure)
-}
+// const onUpDataGame = function () {
+//   event.preventDefault()
+//   const data = getFormFields(event.target)
+//   console.log(data)
+//   api.upDateGame()
+//     .then(ui.updateGameSuccess)
+//     .catch(ui.updateGameFailure)
+// }
 const addGameEventsHandlers = function () {
   $('.box').on('click', onClick)
   $('#new-game').on('submit', onCreateNewGame)
@@ -121,6 +123,6 @@ module.exports = {
   addGameEventsHandlers,
   onClickToReset,
   onCreateNewGame,
-  onIndexGame,
-  onUpDataGame
+  onIndexGame
+  // onUpDataGame
 }
