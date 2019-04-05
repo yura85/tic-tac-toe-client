@@ -7,8 +7,8 @@ const ui = require('./ui')
 
 // reset game button
 const onClickToReset = function (event) {
-  event.preventDefault()
-  $('#container').html('')
+  event.isEventPreventDefault()
+  $('.box').text('')
 }
 // create onClick function to handle the clicks on cells
 let gameStatus = true
@@ -32,25 +32,36 @@ const winnerCheck = function (array) {
   (array[0] === array[4] && array[4] === array[8] && array[8] === currentPlayer) ||
   (array[2] === array[4] && array[4] === array[6] && array[6] === currentPlayer)) {
     gameStatus = false
+    $('.box').off()
+    $('.turn').hide()
     console.log('winner ' + currentPlayer + ' game status ', gameStatus)
+    $('.win-or-loose').text('winner ' + currentPlayer).show()
+    $('.game-over').text('GAME OVER START NEW GAME').show()
   } else if (array.every(index => index !== '')) {
     gameStatus = false
-    console.log('draw')
+    $('.box').off()
+    $('.turn').hide()
+    console.log('draw ', gameStatus)
+    $('.game-over').text('GAME OVER START NEW GAME').show()
+    $('.win-or-loose').text('DROW').show()
   }
 }
 
 let currentPlayer = 'x'
-
+$('.turn').text('player x turn')
 const switchPlayer = function () {
   if (currentPlayer === 'x') {
     currentPlayer = 'o'
+    $('.turn').text('player o turn')
   } else {
     currentPlayer = 'x'
+    $('.turn').text('player x turn')
   }
 }
 
 const onClick = function (event) {
   event.preventDefault()
+
   let currentValue = $(event.target).text()
   console.log(currentValue)
   const dataOfId = $(event.target).data('id')
@@ -73,12 +84,6 @@ const onClick = function (event) {
     wrongMove()
   }
 }
-
-// const play = function (gameboard, positionInGamabord, currentPlayer) {
-//   if (gameboard[positionInGamabord] === '') {
-//     gameboard[positionInGamabord] = currentPlayer
-//   }
-// }
 
 const addGameEventsHandlers = function () {
   // when the #click-00 is clicked run on click function

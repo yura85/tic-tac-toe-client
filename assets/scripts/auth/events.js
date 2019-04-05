@@ -37,47 +37,18 @@ const onSignOut = function (event) {
     .catch(ui.signOutFailure)
 }
 
-// reset game button
-const onClickToReset = function () {
-  event.preventDefault()
-  $('#container').html('')
-}
-// create onClick function to handle the clicks on cells
-const gamebord = [
-  [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
-]
-
-const wrongMove = function () {
-  $('.message').html('this box is taken')
-  console.log($('.message'))
-}
-
-let currentPlayer = 'x'
-
-const onClick = function (event) {
-  event.preventDefault()
-  let currentValue = $(event.target).text()
-  console.log(currentValue)
-  if (currentValue === '' && currentPlayer === 'x') {
-    currentValue = $(event.target).text(currentPlayer)
-    console.log(currentValue)
-    currentPlayer = 'o'
-  } else if (currentValue === '' && currentPlayer === 'o') {
-    currentValue = $(event.target).text(currentPlayer)
-    currentPlayer = 'x'
-  } else {
-    wrongMove()
-  }
-}
 const addHandlers = function () {
   // when the #click-00 is clicked run on click function
-  $('.box').on('click', onClick)
+  $('#sign-up').on('submit', onSignUp)
+  $('#sign-in').on('submit', onSignIn)
+  $('#change-password').on('submit', onChangePassword)
+  $('#sign-out').on('submit', onSignOut)
+  // $('.box').on('click', onClick)
 }
 module.exports = {
   addHandlers,
   onSignUp,
   onSignIn,
   onSignOut,
-  onChangePassword,
-  onClickToReset
+  onChangePassword
 }
