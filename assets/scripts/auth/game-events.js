@@ -7,14 +7,10 @@ const ui = require('./ui')
 const store = require('../store')
 
 // reset game button
-const onClickToReset = function (event) {
-  event.isEventPreventDefault()
-  $('.box').text('')
-}
 // create onClick function to handle the clicks on cells
+let currentPlayer = 'x'
 let gameStatus = false
-
-const gameboard = ['', '', '', '', '', '', '', '']
+let gameboard = ['', '', '', '', '', '', '', '']
 
 const wrongMove = function () {
   $('.message').text('this box is taken').show()
@@ -23,7 +19,7 @@ const wrongMove = function () {
   }, 2000)
 }
 
-const winnerCheck = function (array) {
+const winnerCheck = function (array, currentPlayer) {
   if ((array[0] === array[1] && array[1] === array[2] && array[2] === currentPlayer) ||
   (array[3] === array[4] && array[4] === array[5] && array[5] === currentPlayer) ||
   (array[6] === array[7] && array[7] === array[8] && array[8] === currentPlayer) ||
@@ -37,21 +33,19 @@ const winnerCheck = function (array) {
     $('.box').off()
     $('.turn').hide()
     console.log('winner ' + currentPlayer + ' game status ', gameStatus)
-    $('.win-or-loose').text('winner ' + currentPlayer).show()
-    $('.game-over').text('GAME OVER START NEW GAME').show()
+    $('.game-over').text('WINNER ' + currentPlayer + ' START NEW GAME').show()
   } else if (array.every(index => index !== '')) {
     gameStatus = true
     console.log(store.game)
     $('.box').off()
     $('.turn').hide()
     console.log('draw ', gameStatus)
-    $('.game-over').text('GAME OVER START NEW GAME').show()
-    $('.win-or-loose').text('DROW').show()
+    $('.game-over').text('IT\'S DRAW').show()
   }
 }
 
-let currentPlayer = 'x'
 $('.turn').text('player x turn')
+
 const switchPlayer = function () {
   if (currentPlayer === 'x') {
     currentPlayer = 'o'
@@ -69,7 +63,6 @@ const onClick = function (event) {
   console.log(currentValue)
   const dataOfId = $(event.target).data('id')
 
-  // store.game.id = dataOfId
   console.log(dataOfId)
 
   gameboard[dataOfId] = currentPlayer
@@ -77,14 +70,20 @@ const onClick = function (event) {
 
   if (currentValue === '' && currentPlayer === 'x') {
     currentValue = $(event.target).text(currentPlayer)
-    winnerCheck(gameboard)
+    winnerCheck(gameboard, currentPlayer)
     api.upDateGame(dataOfId, currentPlayer, gameStatus)
+    console.log(dataOfId, currentPlayer, gameStatus)
+    // .tnen(ui.updateGameSuccess)
+    // .catch(ui.updateGameFailure)
     console.log(currentValue)
     switchPlayer()
   } else if (currentValue === '' && currentPlayer === 'o') {
     currentValue = $(event.target).text(currentPlayer)
-    winnerCheck(gameboard)
+    winnerCheck(gameboard, currentPlayer)
     api.upDateGame(dataOfId, currentPlayer, gameStatus)
+    console.log(dataOfId, currentPlayer, gameStatus)
+    // .tnen(ui.updateGameSuccess)
+    // .catch(ui.updateGameFailure)
     console.log(currentValue)
     switchPlayer()
   } else {
@@ -105,24 +104,31 @@ const onIndexGame = function (event) {
     .then(ui.indexGameSuccess)
     .catch(ui.indexGameFailure)
 }
-// const onUpDataGame = function () {
-//   event.preventDefault()
-//   const data = getFormFields(event.target)
-//   console.log(data)
-//   api.upDateGame()
-//     .then(ui.updateGameSuccess)
-//     .catch(ui.updateGameFailure)
-// }
+const onClickToReset = function (event) {
+  event.preventDefault()
+  $('.box').on('click', onClick)
+  $('.box').empty()
+  $('.turn').text('player x turn')
+  $('.win-or-loose').hide()
+  $('.game-over').hide()
+  currentPlayer = 'x'
+  gameStatus = false
+  gameboard = ['', '', '', '', '', '', '', '', '']
+  console.log(gameboard)
+  api.createNewGame()
+    .then(ui.createNewGameSuccess)
+    .catch(ui.newGameFail)
+}
+
 const addGameEventsHandlers = function () {
   $('.box').on('click', onClick)
   $('#new-game').on('submit', onCreateNewGame)
   $('#index-game').on('submit', onIndexGame)
-  // $('#update-game').on('submit', onUpDataGame)
+  $('#reset').on('submit', onClickToReset)
 }
 module.exports = {
   addGameEventsHandlers,
   onClickToReset,
   onCreateNewGame,
   onIndexGame
-  // onUpDataGame
 }

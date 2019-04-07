@@ -55,7 +55,6 @@ const indexGame = function () {
   })
 }
 const upDateGame = function (dataOfId, currentPlayer, gameStatus) {
-  console.log(currentPlayer, gameStatus)
   return $.ajax({
     url: config.apiUrl + '/games/' + store.game.id,
     method: 'PATCH',

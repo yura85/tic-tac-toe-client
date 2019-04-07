@@ -11,4 +11,10 @@ $(() => {
   // your JS code goes here
   userEvents.addHandlers()
   gameEvents.addGameEventsHandlers()
+
+  $('.message').text('Please create a new account or sign in')
+  $('.container').hide()
+  $('#reset').hide()
+  $('#index-game').hide()
+  $('#new-game').hide()
 })
