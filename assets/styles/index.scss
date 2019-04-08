@@ -5,6 +5,14 @@ $font-color: $light;
 
 body {
   background-color: $body-bg-color;
+  min-height: 100vh;
+}
+
+.conteiner {
+  margin: auto;
+  max-height: 90vh;
+  max-width: 90vh;
+  width: 90%;
 }
 
 .box {

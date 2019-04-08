@@ -33,12 +33,14 @@ const signOutSuccess = function () {
   console.log('sign out success')
   store.user = null
   $('form').trigger('reset')
+  $('.box').empty()
   $('#sign-up').show()
   $('#sign-in').show()
   $('.container').hide()
   $('#index-game').hide()
   $('#new-game').hide()
   $('#reset').hide()
+  $('.message').hide()
 }
 
 const createNewGameSuccess = function (data) {
@@ -50,26 +52,17 @@ const createNewGameSuccess = function (data) {
   $('#reset').show()
   console.log('create new game success ', data)
 }
-const createNewGameFailure = function (data) {
-  console.log('create new game failure ', data)
-}
+
 const indexGameSuccess = function (data) {
-  $('.message').show('You played ' + store.game + ' games')
+  $('.message').text('You played ' + data.games.length).show()
   console.log('index of all games success ', data)
 }
-const indexGameFailure = function (data) {
-  console.log('index of all games failure ', data)
-}
+
 const updateGameSuccess = function (data) {
   console.log('update success ', data)
   store.game = data.game
 }
-const updateGameFailure = function () {
-  console.log('update failure')
-}
-const resetGame = function () {
 
-}
 module.exports = {
   signUpSuccess,
   Failure,
@@ -78,10 +71,6 @@ module.exports = {
   changePasswordFailure,
   signOutSuccess,
   createNewGameSuccess,
-  createNewGameFailure,
   indexGameSuccess,
-  indexGameFailure,
-  updateGameSuccess,
-  updateGameFailure,
-  resetGame
+  updateGameSuccess
 }

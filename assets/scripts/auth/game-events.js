@@ -6,17 +6,19 @@ const api = require('./api')
 const ui = require('./ui')
 const store = require('../store')
 
-// reset game button
-// create onClick function to handle the clicks on cells
+// declere variables currentPlayer, gameboard and gameStatus initial value
+
 let currentPlayer = 'x'
 let gameStatus = false
 let gameboard = ['', '', '', '', '', '', '', '']
 
-const wrongMove = function () {
-  $('.message').text('this box is taken').show()
-  setTimeout(() => {
-    $('.message').text('').hide()
-  }, 2000)
+const wrongMove = function (currentValue) {
+  if ((currentValue === 'x') || (currentValue === 'o')) {
+    $('.message').text('this box is taken').show()
+    setTimeout(() => {
+      $('.message').text('').hide()
+    }, 2000)
+  }
 }
 
 const winnerCheck = function (array, currentPlayer) {
@@ -30,14 +32,12 @@ const winnerCheck = function (array, currentPlayer) {
   (array[2] === array[4] && array[4] === array[6] && array[6] === currentPlayer)) {
     gameStatus = true
     console.log(store.game)
-    $('.box').off()
     $('.turn').hide()
     console.log('winner ' + currentPlayer + ' game status ', gameStatus)
     $('.game-over').text('WINNER ' + currentPlayer + ' START NEW GAME').show()
   } else if (array.every(index => index !== '')) {
     gameStatus = true
     console.log(store.game)
-    $('.box').off()
     $('.turn').hide()
     console.log('draw ', gameStatus)
     $('.game-over').text('IT\'S DRAW').show()
@@ -58,36 +58,45 @@ const switchPlayer = function () {
 
 const onClick = function (event) {
   event.preventDefault()
-
+  if (gameStatus === true) {
+    console.log('lllllllllll')
+    return
+  }
   let currentValue = $(event.target).text()
   console.log(currentValue)
   const dataOfId = $(event.target).data('id')
 
   console.log(dataOfId)
-
-  gameboard[dataOfId] = currentPlayer
-  console.log(gameboard)
+  console.log(currentValue, currentPlayer)
 
   if (currentValue === '' && currentPlayer === 'x') {
+    gameboard[dataOfId] = currentPlayer
+    console.log(gameboard)
     currentValue = $(event.target).text(currentPlayer)
     winnerCheck(gameboard, currentPlayer)
     api.upDateGame(dataOfId, currentPlayer, gameStatus)
     console.log(dataOfId, currentPlayer, gameStatus)
-    // .tnen(ui.updateGameSuccess)
-    // .catch(ui.updateGameFailure)
+    // .then(ui.updateGameSuccess)
+    //  .catch(ui.Failure)
     console.log(currentValue)
     switchPlayer()
+    // debugger
   } else if (currentValue === '' && currentPlayer === 'o') {
+    gameboard[dataOfId] = currentPlayer
+    console.log(gameboard)
     currentValue = $(event.target).text(currentPlayer)
     winnerCheck(gameboard, currentPlayer)
     api.upDateGame(dataOfId, currentPlayer, gameStatus)
     console.log(dataOfId, currentPlayer, gameStatus)
-    // .tnen(ui.updateGameSuccess)
-    // .catch(ui.updateGameFailure)
+    // .then(ui.updateGameSuccess)
+    //  .catch(ui.Failure)
     console.log(currentValue)
     switchPlayer()
+    // debugger
   } else {
-    wrongMove()
+    // debugger
+    console.log('sdfsdf', currentValue)
+    wrongMove(currentValue)
   }
 }
 const onCreateNewGame = function (event) {
@@ -95,29 +104,29 @@ const onCreateNewGame = function (event) {
   const data = getFormFields(event.target)
   api.createNewGame(data)
     .then(ui.createNewGameSuccess)
-    .catch(ui.createNewGameFailure)
+    .catch(ui.Failure)
 }
 const onIndexGame = function (event) {
   event.preventDefault()
   console.log('index game')
   api.indexGame()
     .then(ui.indexGameSuccess)
-    .catch(ui.indexGameFailure)
+    .catch(ui.Failure)
 }
 const onClickToReset = function (event) {
   event.preventDefault()
-  $('.box').on('click', onClick)
   $('.box').empty()
-  $('.turn').text('player x turn')
+  console.log($('.box').text())
+  gameboard = ['', '', '', '', '', '', '', '', '']
+  currentPlayer = 'x'
+  api.createNewGame(event)
+    .then(ui.createNewGameSuccess)
+    .catch(ui.Failure)
   $('.win-or-loose').hide()
   $('.game-over').hide()
-  currentPlayer = 'x'
+  $('.turn').text('player ' + currentPlayer + ' turn').show()
   gameStatus = false
-  gameboard = ['', '', '', '', '', '', '', '', '']
   console.log(gameboard)
-  api.createNewGame()
-    .then(ui.createNewGameSuccess)
-    .catch(ui.newGameFail)
 }
 
 const addGameEventsHandlers = function () {
