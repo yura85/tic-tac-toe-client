@@ -1,10 +1,6 @@
 wireframe -- https://imgur.com/a/w8QiCtK
 to represent a game bord in js i use an array
-gameDord = [
-  [1, 2, 3],
-  [4, 5, 6],
-  [7, 8, 9]
-]
+gameDord = ['', '', '', '', '', '', '', '', '']
 project approach
   1- wellcome page, sign up and login
   2- game bord
