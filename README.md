@@ -34,25 +34,16 @@ game play
 7 -- UI part
 
 Depvelopment process
-In begining i try to stick to plan what i have made but unfortunately  i stuck on the game logic part.
+In begining i try to stick to plan what i have made, but unfortunately  i stuck on the game logic part.
 And after that i deviated from my plan. And i jump to the user authentication part wich looked the easeast
 to me.
 Than i come back to game logic and in the same time i started geme events part. That time where methodical process and clean code stopped. And to the last day i was working on the game events and game API.
 I didn't have time to do UI.
-Cleaner code
-After i deviated from my prpject plan  
-
-
-
-
-How you plan to keep your code modular.
- - will try to keep my code readable and refactor it sa it possible
-
-What creative spin will you add to your project?
-- dont know yet
-
-How will you use version control to backup / track your project?
-- will try to commit it often
-
-What additional features will you build if you have extra time?
-- if i have time i try to add part vs computer
+Dry code
+unfortunately my code is not dry it have some parts that need to be refactor.
+Keep code modular
+I try to commit often and don't work in the master branch.
+Creative spin
+In the future i w'd like to add some style to my project.
+Additional features
+In the future i w'd like to add option to play vs computer
