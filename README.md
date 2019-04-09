@@ -7,9 +7,7 @@ Technologies Used
 -HTML5
 -CSS
 -Bootstrap
-
 Planing process
-
 I try to stick to the project requirements so i breaked it on to small parts
 ---First i did my wireframe -- https://imgur.com/a/w8QiCtK
 ---Second i create users stories
@@ -28,7 +26,6 @@ game play:
 --- next i bild game logic
 --- the game API interaction was the hardest part for me wich took a lot of my time.
 --- then UI and refactoring part. unfortunately i dad not have enough time to do it so my app doesn't look nice
-=======
 Dry code
 unfortunately my code is not dry it have some parts that need to be refactor.
 Keep code modular
@@ -37,4 +34,3 @@ Creative spin
 In the future i w'd like to add some style to my project.
 Additional features
 In the future i w'd like to add option to play vs computer
->>>>>>> work
