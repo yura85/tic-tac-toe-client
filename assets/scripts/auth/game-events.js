@@ -59,7 +59,6 @@ const switchPlayer = function () {
 const onClick = function (event) {
   event.preventDefault()
   if (gameStatus === true) {
-    console.log('lllllllllll')
     return
   }
   let currentValue = $(event.target).text()
@@ -76,11 +75,8 @@ const onClick = function (event) {
     winnerCheck(gameboard, currentPlayer)
     api.upDateGame(dataOfId, currentPlayer, gameStatus)
     console.log(dataOfId, currentPlayer, gameStatus)
-    // .then(ui.updateGameSuccess)
-    //  .catch(ui.Failure)
     console.log(currentValue)
     switchPlayer()
-    // debugger
   } else if (currentValue === '' && currentPlayer === 'o') {
     gameboard[dataOfId] = currentPlayer
     console.log(gameboard)
@@ -88,8 +84,6 @@ const onClick = function (event) {
     winnerCheck(gameboard, currentPlayer)
     api.upDateGame(dataOfId, currentPlayer, gameStatus)
     console.log(dataOfId, currentPlayer, gameStatus)
-    // .then(ui.updateGameSuccess)
-    //  .catch(ui.Failure)
     console.log(currentValue)
     switchPlayer()
     // debugger

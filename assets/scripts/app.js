@@ -17,4 +17,5 @@ $(() => {
   $('#reset').hide()
   $('#index-game').hide()
   $('#new-game').hide()
+  $('#sign-out').hide()
 })
