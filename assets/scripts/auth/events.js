@@ -12,29 +12,30 @@ const onSignUp = function (event) {
   console.log(data)
   api.signUp(data)
     .then(ui.signUpSuccess)
-    .catch(ui.Failure)
+    .catch(ui.failure)
 }
+//  create the sign in function
 const onSignIn = function (event) {
   event.preventDefault()
   const data = getFormFields(event.target)
-  console.log(data)
   api.signIn(data)
     .then(ui.signInSeccess)
-    .catch(ui.Failure)
+    .catch(ui.failure)
 }
+// create the change password function
 const onChangePassword = function (event) {
   event.preventDefault()
   const data = getFormFields(event.target)
-  console.log(data)
   api.changePassword(data)
     .then()
-    .catch()
+    .catch(ui.failure)
 }
+//  create sign out function
 const onSignOut = function (event) {
   event.preventDefault()
   api.signOut()
     .then(ui.signOutSuccess)
-    .catch(ui.Failure)
+    .catch(ui.failure)
 }
 
 const addHandlers = function () {

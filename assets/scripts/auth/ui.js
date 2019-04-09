@@ -2,35 +2,29 @@
 const store = require('../store')
 
 const signUpSuccess = function (data) {
-  console.log('sign up success with the data', data)
-  $('.message').text('Sign up success')
+  $('.message').text('You created account, please sign in to play')
   $('#sign-up').hide()
   $('#sign-up').trigger('reset')
 }
-const Failure = function (data) {
-  console.log('something went wrong please try again')
+const failure = function (data) {
+  $('.message').text('something went wrong please try again')
 }
 const signInSeccess = function (data) {
   $('.message').text('Sign in success click to play')
-  console.log('sign in success with the data', data)
   store.user = data.user
   $('form').trigger('reset')
   $('#sign-up').hide()
   $('#sign-in').hide()
   $('#new-game').show()
+  $('#sign-out').show()
 }
 
-const changePasswordSeccess = function (data) {
-  console.log('change password success with the data', data)
+const changePasswordSuccess = function (data) {
   store.user = data.user
   $('form').trigger('reset')
 }
-const changePasswordFailure = function (data) {
-  console.log('sign in failure with the data', data)
-  $('form').trigger('reset')
-}
+
 const signOutSuccess = function () {
-  console.log('sign out success')
   store.user = null
   $('form').trigger('reset')
   $('.box').empty()
@@ -50,25 +44,24 @@ const createNewGameSuccess = function (data) {
   $('#index-game').show()
   $('#new-game').hide()
   $('#reset').show()
-  console.log('create new game success ', data)
 }
 
 const indexGameSuccess = function (data) {
-  $('.message').text('You played ' + data.games.length).show()
-  console.log('index of all games success ', data)
+  $('.message').text('You played ' + data.games.length + ' games').show()
+  setTimeout(() => {
+    $('.message').text('').hide()
+  }, 2000)
 }
 
 const updateGameSuccess = function (data) {
-  console.log('update success ', data)
   store.game = data.game
 }
 
 module.exports = {
   signUpSuccess,
-  Failure,
+  failure,
   signInSeccess,
-  changePasswordSeccess,
-  changePasswordFailure,
+  changePasswordSuccess,
   signOutSuccess,
   createNewGameSuccess,
   indexGameSuccess,
