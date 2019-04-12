@@ -34,11 +34,13 @@ const winnerCheck = function (array, currentPlayer) {
   (array[2] === array[4] && array[4] === array[6] && array[6] === currentPlayer)) {
     gameStatus = true
     $('.turn').hide()
+    // $('.container').hide()
     $('.game-over').text('WINNER ' + currentPlayer + ' START NEW GAME').show()
   } else if (array.every(index => index !== '')) {
     gameStatus = true
     $('.turn').hide()
-    $('.game-over').text('IT\'S DRAW').show()
+    // $('.container').hide()
+    $('.game-over').text('IT\'S DRAW! START A NEW GAME').show()
   }
 }
 

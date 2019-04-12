@@ -8,6 +8,7 @@ const signUpSuccess = function (data) {
 }
 const failure = function (data) {
   $('.message').text('something went wrong please try again')
+  $('form').trigger('reset')
 }
 const signInSeccess = function (data) {
   $('.message').text('Sign in success click to play')
@@ -17,11 +18,15 @@ const signInSeccess = function (data) {
   $('#sign-in').hide()
   $('#new-game').show()
   $('#sign-out').show()
+  $('#change-password').show()
 }
 
 const changePasswordSuccess = function (data) {
-  store.user = data.user
+  // store.user = data.user
   $('.message').text('You successfuly change your password').show()
+  setTimeout(() => {
+    $('.message').text('').hide()
+  }, 2000)
   $('form').trigger('reset')
 }
 
@@ -35,13 +40,15 @@ const signOutSuccess = function () {
   $('#index-game').hide()
   $('#new-game').hide()
   $('#reset').hide()
-  $('.message').text('Please create a new account or sign in to play').show()
+  $('.message').text('Sign out success! Please create a new account or sign in to play').show()
   $('#sign-out').hide()
   $('.game-over').hide()
+  $('#change-password').hide()
 }
 
 const createNewGameSuccess = function (data) {
   store.game = data.game
+  $('.container').show()
   $('.message').hide()
   $('.container').show()
   $('#index-game').show()
