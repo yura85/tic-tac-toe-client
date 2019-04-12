@@ -16,4 +16,5 @@ $(() => {
   $('#index-game').hide()
   $('#new-game').hide()
   $('#sign-out').hide()
+  $('#change-password').hide()
 })
