@@ -3,7 +3,7 @@ const store = require('../store')
 
 const signUpSuccess = function (data) {
   $('.message').text('You created account, please sign in to play').show()
-  $('#sign-up').hide()
+  // $('#sign-up').hide()
   $('#sign-up').trigger('reset')
 }
 const failure = function (data) {

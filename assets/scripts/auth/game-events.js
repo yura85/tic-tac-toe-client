@@ -34,13 +34,11 @@ const winnerCheck = function (array, currentPlayer) {
   (array[2] === array[4] && array[4] === array[6] && array[6] === currentPlayer)) {
     gameStatus = true
     $('.turn').hide()
-    // $('.container').hide()
-    $('.game-over').text('WINNER ' + currentPlayer + ' START NEW GAME').show()
+    $('.game-over').text('WINNER ' + currentPlayer).show()
   } else if (array.every(index => index !== '')) {
     gameStatus = true
     $('.turn').hide()
-    // $('.container').hide()
-    $('.game-over').text('IT\'S DRAW! START A NEW GAME').show()
+    $('.game-over').text('IT\'S DRAW').show()
   }
 }
 
@@ -61,6 +59,7 @@ const switchPlayer = function () {
 const onClick = function (event) {
   event.preventDefault()
   if (gameStatus === true) {
+    $('.turn').text('game is over start a new game').show()
     return
   }
   let currentValue = $(event.target).text()
@@ -103,9 +102,9 @@ const onIndexGame = function (event) {
 //  create function that restart game at any time
 const onClickToReset = function (event) {
   event.preventDefault()
+  currentPlayer = 'x'
   $('.box').empty()
   gameboard = ['', '', '', '', '', '', '', '', '']
-  switchPlayer()
   api.createNewGame(event)
     .then(ui.createNewGameSuccess)
     .catch(ui.Failure)
