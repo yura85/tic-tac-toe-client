@@ -59,7 +59,10 @@ const switchPlayer = function () {
 const onClick = function (event) {
   event.preventDefault()
   if (gameStatus === true) {
-    $('.turn').text('game is over start a new game').show()
+    $('.message').text('game over start new game').show()
+    setTimeout(() => {
+      $('.message').text('').hide()
+    }, 3000)
     return
   }
   let currentValue = $(event.target).text()
@@ -116,7 +119,6 @@ const onClickToReset = function (event) {
 
 const addGameEventsHandlers = function () {
   $('.box').on('click', onClick)
-  $('#new-game').on('submit', onCreateNewGame)
   $('#index-game').on('submit', onIndexGame)
   $('#reset').on('submit', onClickToReset)
 }

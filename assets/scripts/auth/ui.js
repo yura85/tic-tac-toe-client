@@ -7,16 +7,20 @@ const signUpSuccess = function (data) {
   $('#sign-up').trigger('reset')
 }
 const failure = function (data) {
-  $('.message').text('something went wrong please try again')
+  $('.message').text('something went wrong please try again').show()
+  setTimeout(() => {
+    $('.message').text('').hide()
+  }, 2000)
   $('form').trigger('reset')
 }
 const signInSeccess = function (data) {
-  $('.message').text('Sign in success click to play')
+  $('.message').text('Sign in success start new game').show()
   store.user = data.user
   $('form').trigger('reset')
   $('#sign-up').hide()
   $('#sign-in').hide()
-  $('#new-game').show()
+  $('#reset').show()
+  // $('#new-game').show()
   $('#sign-out').show()
   $('#change-password').show()
 }
@@ -41,6 +45,9 @@ const signOutSuccess = function () {
   $('#new-game').hide()
   $('#reset').hide()
   $('.message').text('Sign out success! Please create a new account or sign in to play').show()
+  setTimeout(() => {
+    $('.message').text('').hide()
+  }, 2000)
   $('#sign-out').hide()
   $('.game-over').hide()
   $('#change-password').hide()
